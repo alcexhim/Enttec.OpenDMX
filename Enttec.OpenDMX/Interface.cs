@@ -10,9 +10,9 @@ namespace Enttec.OpenDMX
 	public class Interface
 	{
 		private Device device = null;
-		public Interface(uint port)
+		public Interface(int vendorID, int productID)
 		{
-			device = new Device(port);
+			device = new Device(vendorID, productID);
 
 			device.Open();
 			InitializeOpenDMX();
@@ -82,6 +82,15 @@ namespace Enttec.OpenDMX
 			WritePacket(6, buffer);
 			device.Break = false;
 		}
+		public void SetChannelValues(byte[] channelValues)
+		{
+			device.Break = true;
+			buffer = channelValues;
+
+			WritePacket(6, buffer);
+			device.Break = false;
+		}
+
 		public void Write(byte[] data)
 		{
 			if (data.Length > 512) throw new ArgumentException("Data size must be less than or equal to 255 bytes");

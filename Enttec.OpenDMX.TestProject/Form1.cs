@@ -13,7 +13,7 @@ namespace Enttec.OpenDMX.TestProject
         {
             InitializeComponent();
 
-            opendmx = new Interface(0);
+            opendmx = new Interface(0x0403, 0x6001);
             fixture = new Fixture(opendmx, 1);
             fixture.Channels.Add("Pan Left/Right Coarse", 1, 0, 255);
             fixture.Channels.Add("Pan Left/Right Fine", 2, 0, 255);
